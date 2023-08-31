@@ -1,7 +1,33 @@
 <?php 
   $css = 'form.css';
   include '../header/header.php'; 
+  require_once 'db_connection.php';
+  require_once 'db_queries.php';
+
+  // Create a connection object
+  $conn = include 'db_connection.php';
+  // Create a query object
+  $dbQueries = new DBQueries($conn);
+
+  // Assuming you have a form that submits data to the server
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $data = [
+          'name' => $_POST['name'],
+          'email' => $_POST['email'],
+          'aihe' => $_POST['aihe'],
+          'palautte' => $_POST['palautte'],
+          'agree-uutiskirjeen' => $_POST['agree-uutiskirjeen'],
+      ];
+
+      // Call the insertData method from the query object
+      if ($dbQueries->insertData('your_table', $data)) {
+          echo "Data inserted successfully";
+      } else {
+          echo "Error inserting data";
+      }
+  }
   ?>
+
   <div class="container-form">
   <div class="meista">
       <h3 class="title">Meistä</h3>
@@ -13,7 +39,7 @@
       </p>
       </div>
     <div class="form-box">
-      <form class="form">
+      <form class="form" method="post">
         <span class="title">Ota yhteyttä</span>
         <div class="form-container">
           <div class="user-info">
@@ -26,12 +52,13 @@
           <select name="aihe" id="aihe">
             <option value="kysymys">kysymys tuotteista</option>
             <option value="tilaus">tilaus</option>
-            <option value="pyyntö">yhteydenottopyyntö</option>
+            <option value="yhteydenottopyyntö">yhteydenottopyyntö</option>
           </select>
           <!-- <div class="select-arrow">▾</div> -->
           </div>
           <div class="palautte">
             <textarea
+              name="palautte"
               rows="3"
               cols="50"
               class="input txt-area"
@@ -40,7 +67,7 @@
           </div>
         </div>
         <div class="checkbox-wrapper">
-          <input type="checkbox" class="ui-checkbox" />
+          <input name="agree-uutiskirjeen" type="checkbox" class="ui-checkbox" />
           <p>Haluan tilata Puutarhaliike Neilikan uutiskirjeen</p>
         </div>
         <button>lähettää</button>
