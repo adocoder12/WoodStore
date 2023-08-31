@@ -1,0 +1,59 @@
+.site-footer {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr;
+  width: calc(100% - 16px);
+  min-height: 40vh;
+  background-color: var(--secondary-background);
+  padding: 20px 12px;
+  gap: 15px;
+}
+.main-title {
+  align-self: flex-start;
+}
+
+.info-footer {
+  display: grid;
+  width: 100%;
+  gap: 30px;
+  justify-content: start;
+}
+.store-espoo,
+.store-helsinki {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 6px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+.site-footer hr {
+  width: 80%;
+  border-top-color: #131212;
+  opacity: 0.5;
+  margin: 10px 0;
+}
+.copyright-text {
+  color: #666;
+}
+
+@media (min-width: 568px) {
+  .info-footer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
+    width: 100%;
+  }
+
+  .site-footer hr {
+    width: 50%;
+  }
+}
